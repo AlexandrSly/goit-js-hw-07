@@ -19,17 +19,10 @@ const galleryEl = galleryItems.reduce((acc, img) => {
 
 gallerySection.innerHTML = galleryEl;
 
-gallerySection.addEventListener("click", (e) => {
-  e.preventDefault();
-  if (e.target.nodeName !== "IMG") {
-    return;
-  } else {
-    const lightbox = new SimpleLightbox(".gallery a", {
-      captions: true,
-      captionDelay: 250,
-      captionsData: "alt",
-      loop: true,
-      docClose: true,
-    });
-  }
+new SimpleLightbox(".gallery a", {
+  captions: true,
+  captionDelay: 250,
+  captionsData: "alt",
+  loop: true,
+  docClose: true,
 });

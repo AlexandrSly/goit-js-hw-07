@@ -26,19 +26,28 @@ gallerySection.addEventListener("click", (e) => {
     return;
   } else {
     // console.log(e.target.dataset.source);
-    const instance = basicLightbox.create(`
+    const instance = basicLightbox.create(
+      `
     <img src="${e.target.dataset.source}" width="800" height="600">
-`);
+`,
+      {
+        onShow: () => {
+          gallerySection.addEventListener("keydown", onPressKey);
+        },
+        onClosed: () => {
+          gallerySection.removeEventListener("keydown", onPressKey);
+        },
+      }
+    );
     instance.show();
   }
 });
 
+function onPressKey(e) {
+  console.log("onPressKey");
+}
+
 gallerySection.addEventListener("keydown", (e) => {
-  const visible = basicLightbox.visible();
-  // console.log(visible, e.code);
-  if (!visible) {
-    return;
-  } else if (e.code === "Escape") {
-    instance.close();
-  }
+  if (e.code !== "Escape") return;
+  instance.close();
 });
