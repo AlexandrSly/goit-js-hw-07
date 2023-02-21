@@ -20,13 +20,14 @@ const galleryEl = galleryItems.reduce((acc, img) => {
 gallerySection.innerHTML = galleryEl;
 // console.log(galleryEl);
 
+let instance = 0;
 gallerySection.addEventListener("click", (e) => {
   e.preventDefault();
   if (e.target.nodeName !== "IMG") {
     return;
   } else {
     // console.log(e.target.dataset.source);
-    const instance = basicLightbox.create(
+    instance = basicLightbox.create(
       `
     <img src="${e.target.dataset.source}" width="800" height="600">
 `,
@@ -44,10 +45,6 @@ gallerySection.addEventListener("click", (e) => {
 });
 
 function onPressKey(e) {
-  console.log("onPressKey");
-}
-
-gallerySection.addEventListener("keydown", (e) => {
   if (e.code !== "Escape") return;
   instance.close();
-});
+}
